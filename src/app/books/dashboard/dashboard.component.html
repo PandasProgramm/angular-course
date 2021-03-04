@@ -1,0 +1,14 @@
+
+<ng-container *ngIf="books">
+  <app-book
+    *ngFor="let bookS of books;
+    trackBy: trackByItemId" [book]="bookS"
+    (rateUp)="rateUp($event)"
+    (rateDown)="rateDown($event)">
+  </app-book>
+</ng-container>
+<div>
+  <h5>Die Gesamtanzahl der Bücher beträgt: {{books.length}}</h5>
+</div>
+
+

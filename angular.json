@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@angular-schule/workshop-styles/index.scss",
               "src/styles.css"
             ],
             "scripts": []

@@ -1,0 +1,30 @@
+<div class="card mb-4">
+  <div class="card-body bg-light">
+    <img
+      class="img-thumbnail float-right"
+      src="//api.angular.schule/avatar/{{book?.rating}}"
+    />
+    <div class="card-title">
+      <h2>
+        {{ book?.title }}
+        <span class="badge badge-secondary" [ngSwitch]="book?.rating">
+          <span *ngSwitchCase="1">⭐</span>
+          <span *ngSwitchCase="2">⭐⭐</span>
+          <span *ngSwitchCase="3">⭐⭐⭐</span>
+          <span *ngSwitchCase="4">⭐⭐⭐⭐</span>
+          <span *ngSwitchCase="5">⭐⭐⭐⭐⭐</span>
+        </span>
+      </h2>
+      <p>
+        <strong>Preis:</strong>
+        {{ book?.price|currency: 'EUR' }}
+      </p>
+    </div>
+    <p>{{ book?.description}}</p>
+
+    <div>
+      <button class="btn btn-success mr-2"  (click)="doRateUp()">+</button>
+      <button class="btn btn-danger mr-2" (click)="doRateDown()">-</button>
+    </div>
+  </div>
+</div>
