@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   constructor(private bookRatingService:BookRatingService) { }
 
   ngOnInit(): void {
+
     this.books = [
       {
         isbn: `123`,
