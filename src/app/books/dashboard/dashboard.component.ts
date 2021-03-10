@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Book} from '../shared/models/book';
 import {BookRatingService} from '../shared/services/book-rating.service';
+import {Observable} from 'rxjs';
+import {BookStoreService} from '../shared/services/book-store.service';
+import {map,} from 'rxjs/operators';
+import {select, Store} from '@ngrx/store';
+import {loadBooks} from '../books/store/book.actions';
+import {selectAllBooks} from '../books/store/book.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,49 +15,29 @@ import {BookRatingService} from '../shared/services/book-rating.service';
 })
 export class DashboardComponent implements OnInit {
 
-  books: Book[];
-  constructor(private bookRatingService:BookRatingService) { }
+  books$: Observable<Book[]> =this.bookStore.getAll();
+
+  constructor(
+    private bookRatingService:BookRatingService,
+    private bookStore:BookStoreService,
+    private store:Store
+  ) { }
 
   ngOnInit(): void {
+     // this.books$ = this.bookStore.getAll();
+    //  wir machen jetzt eine Action:
 
-    this.books = [
-      {
-        isbn: `123`,
-        title: 'Mein Buch',
-        description: 'Eine Beschreibung',
-        rating: 2,
-        price: 32.9,
-      },
-      {
-        isbn: '234',
-        title: 'Mein Buch 2',
-        description: 'Eine Beschreibung dieses Buches',
-        rating: 3,
-        price: 12.33
-      },
-      {
-        isbn: '345',
-        title: 'Ein anderes Buch',
-        description: 'schöne Beschreibungen gibt es',
-        rating: 5,
-        price: 11.33
-      },
-      {
-        isbn: '456',
-        title: 'neues Buch',
-        description: 'Eine Beschreibung dieses Buches',
-        rating: 4,
-        price: 22.33
-      },
-    ];
+    this.store.dispatch(loadBooks());
+    this.books$=this.store.pipe(
+      select(selectAllBooks))
   }
   public trackByItemId(index: number, item: Book): string{
     return item.isbn;
   }
   private updateList(book:Book):void {
-    this.books = this.books.map(item => book.isbn === item.isbn ? book : item);
+    this.books$ =this.books$.pipe(
+      map((items) => items.map(item=>book.isbn===item.isbn?book:item)));
   }
-
   rateUp(book:Book){
   const ratedBook=this.bookRatingService.rateUp(book);
   this.updateList(ratedBook);
@@ -60,5 +46,4 @@ export class DashboardComponent implements OnInit {
     const ratedBook= this.bookRatingService.rateDown(book);
     this.updateList(ratedBook);
   }
-
 }

@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "angular-course"
+  "defaultProject": "angular-course",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
