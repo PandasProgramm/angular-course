@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
       map((items) => items.map(item=>book.isbn===item.isbn?book:item)));
   }
   rateUp(book:Book){
-  const ratedBook=this.bookRatingService.rateUp(book);
+  const ratedBook:Book = this.bookRatingService.rateUp(book);
   this.updateList(ratedBook);
   }
   rateDown(book:Book){

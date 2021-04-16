@@ -1,0 +1,8 @@
+ul li:hover{
+  text-decoration: underline;
+  font-weight: bold;
+}
+a:hover{
+  text-decoration: underline;
+  font-weight: bold;
+}

@@ -1,0 +1,15 @@
+<ng-container *ngIf="bookDetails$|async as book">
+  <h2>Titel des Buches: {{book.title}} mit der ISBN: {{book.isbn}}</h2>
+  <p>
+    <span style="font-weight: bolder">Beschreibung: </span>
+    <p>{{book.description}}</p>
+  <p>
+    <span style="font-weight: bolder">Preis: </span>
+    {{book.price|currency:'EUR'}}
+  </p>
+</ng-container>
+<p>
+  <a routerLink="/books">Dashboard</a>
+</p>
+
+

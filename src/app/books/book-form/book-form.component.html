@@ -1,0 +1,33 @@
+<form [formGroup]="bookForm" (ngSubmit)= "submitForm()">
+  <div class="form-group">
+    <label>ISBN:
+      <input type="text" formControlName="isbn" class="form-control">
+    </label>
+    <div *ngIf="isInvalid('isbn')" class="feedback-error">Die ISBN ist ungültig</div>
+  </div>
+  <div>
+    <label>Titel des Buches:
+      <input type="text" formControlName="title" class="form-control">
+    </label>
+    <div *ngIf="isInvalid('title')" class="feedback-error">Der Titel ist ungültig</div>
+  </div>
+  <div class="form-group">
+    <label>Beschreibung:
+      <input type="text" formControlName="description" class="form-control">
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Rating:
+      <input type="number" formControlName="rating" class="form-control">
+    </label>
+    <div *ngIf="isInvalid('rating')" class="feedback-error">Nur ein Rating von 1-5</div>
+  </div>
+  <div class="form-group">
+    <label>Preis:
+      <input type="text" formControlName="price" class="form-control">
+    </label>
+    <div *ngIf="isInvalid('price')" class="feedback-error">Das ist kein gültiger Preis</div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="bookForm.invalid">Abschicken</button>
+</form>
+<pre>{{bookForm.value|json}}</pre>

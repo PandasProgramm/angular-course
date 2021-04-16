@@ -1,0 +1,17 @@
+<div class="form-group">
+  <label>Suche:
+    <input class="form-control"  type="text" [formControl]="searchControl">
+  </label>
+</div>
+<ng-container *ngIf="valueChanges$|async as books">
+  <ng-container *ngFor="let book of books">
+    <h2>Titel des Buches: {{book.title}} mit der ISBN: {{book.isbn}}</h2>
+    <p>
+      <span style="font-weight: bolder">Beschreibung: </span>
+    <p>{{book.description}}</p>
+    <p>
+      <span style="font-weight: bolder">Preis: </span>
+      {{book.price|currency:'EUR'}}
+    </p>
+  </ng-container>
+</ng-container>

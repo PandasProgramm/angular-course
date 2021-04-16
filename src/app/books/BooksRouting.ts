@@ -5,8 +5,8 @@ import {BookCreateComponent} from './book-create/book-create.component';
 import {BookSearchComponent} from './book-search/book-search.component';
 
 
-const routes: Routes = [
-
+const routes: Routes =
+[
   {
     path: '',
     component: DashboardComponent,
